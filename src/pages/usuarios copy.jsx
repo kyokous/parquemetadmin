@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Pencil, Trash2, Plus } from "lucide-react";
 
-export default function Admins() {
-  const [admins, setAdmins] = useState([
+export default function Usuarios() {
+  const [usuarios, setUsuarios] = useState([
     { id: 1, nombre: "Juan Pérez", email: "juan@example.com" },
     { id: 2, nombre: "Ana García", email: "ana@example.com" },
   ]);
@@ -14,41 +14,41 @@ export default function Admins() {
     if (!nombre || !email) return;
 
     if (editandoId) {
-      setAdmins((prev) =>
+      setUsuarios((prev) =>
         prev.map((u) => (u.id === editandoId ? { ...u, nombre, email } : u))
       );
       setEditandoId(null);
     } else {
-      const nuevoAdmin = {
+      const nuevoUsuario = {
         id: Date.now(),
         nombre,
         email,
       };
-      setAdmins((prev) => [...prev, nuevoAdmin]);
+      setUsuarios((prev) => [...prev, nuevoUsuario]);
     }
 
     setNombre("");
     setEmail("");
   };
 
-  const manejarEditar = (admin) => {
-    setNombre(admin.nombre);
-    setEmail(admin.email);
-    setEditandoId(admin.id);
+  const manejarEditar = (usuario) => {
+    setNombre(usuario.nombre);
+    setEmail(usuario.email);
+    setEditandoId(usuario.id);
   };
 
   const manejarEliminar = (id) => {
-    setAdmins((prev) => prev.filter((u) => u.id !== id));
+    setUsuarios((prev) => prev.filter((u) => u.id !== id));
   };
 
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Gestión de Admins</h1>
+        <h1 className="text-2xl font-bold mb-6">Gestión de Usuarios</h1>
 
         <div className="bg-white rounded-xl shadow p-6 mb-8">
           <h2 className="text-lg font-semibold mb-4">
-            {editandoId ? "Editar admin" : "Agregar nuevo admin"}
+            {editandoId ? "Editar usuario" : "Agregar nuevo usuario"}
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 mb-4">
             <input
@@ -76,7 +76,7 @@ export default function Admins() {
         </div>
 
         <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Lista de Admins</h2>
+          <h2 className="text-lg font-semibold mb-4">Lista de Usuarios</h2>
           <table className="w-full table-auto text-left">
             <thead>
               <tr className="text-gray-600">
@@ -86,20 +86,20 @@ export default function Admins() {
               </tr>
             </thead>
             <tbody>
-              {admins.map((admin) => (
-                <tr key={admin.id} className="border-t text-gray-800">
-                  <td className="py-2">{admin.nombre}</td>
-                  <td className="py-2">{admin.email}</td>
+              {usuarios.map((usuario) => (
+                <tr key={usuario.id} className="border-t text-gray-800">
+                  <td className="py-2">{usuario.nombre}</td>
+                  <td className="py-2">{usuario.email}</td>
                   <td className="py-2">
                     <div className="flex gap-2">
                       <button
-                        onClick={() => manejarEditar(admin)}
+                        onClick={() => manejarEditar(usuario)}
                         className="text-blue-600 hover:text-blue-800"
                       >
                         <Pencil size={18} />
                       </button>
                       <button
-                        onClick={() => manejarEliminar(admin.id)}
+                        onClick={() => manejarEliminar(usuario.id)}
                         className="text-red-600 hover:text-red-800"
                       >
                         <Trash2 size={18} />
@@ -108,10 +108,10 @@ export default function Admins() {
                   </td>
                 </tr>
               ))}
-              {admins.length === 0 && (
+              {usuarios.length === 0 && (
                 <tr>
                   <td colSpan="3" className="py-4 text-center text-gray-400">
-                    No hay admins registrados.
+                    No hay usuarios registrados.
                   </td>
                 </tr>
               )}

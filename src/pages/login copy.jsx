@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getDocs, query, collection, where } from "firebase/firestore";
-import { db } from "../firebase"; // Asegúrate que esta ruta sea correcta según tu proyecto
 
 export default function Login() {
   const navigate = useNavigate();
@@ -9,36 +7,10 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const usuariosRef = collection(db, "usuarios");
-      const q = query(
-        usuariosRef,
-        where("Correo", "==", email),
-        where("contrasena", "==", password)
-      );
-      const snapshot = await getDocs(q);
-
-      if (snapshot.empty) {
-        alert("Credenciales incorrectas.");
-        return;
-      }
-
-      const usuario = snapshot.docs[0].data();
-
-      if (usuario.rol !== "Admin") {
-        alert("Acceso denegado: solo administradores pueden iniciar sesión.");
-        return;
-      }
-
-      // Autenticación exitosa
-      navigate("/dashboard");
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error);
-      alert("Error al iniciar sesión. Intenta nuevamente.");
-    }
+    // Aquí va la lógica de autenticación (por ejemplo, Firebase)
+    console.log("Iniciar sesión con:", email, password);
   };
 
   return (
@@ -75,6 +47,7 @@ export default function Login() {
           <button
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition"
+            onClick={() => navigate("/dashboard")}
           >
             Iniciar sesión
           </button>

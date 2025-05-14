@@ -17,7 +17,7 @@ export default function Dashboard() {
   const sections = [
     { name: "Mapa", path: "/mapa", icon: <MapPin size={32} /> },
     { name: "Usuarios", path: "/usuarios", icon: <Users size={32} /> },
-    { name: "Admins", path: "/admins", icon: <ShieldCheck size={32} /> },
+
     {
       name: "Cuestionarios",
       path: "/cuestionarios",
@@ -50,7 +50,7 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-6">
           {sections.map((section) => (
             <div
               key={section.name}
