@@ -35,7 +35,7 @@ export default function Usuarios() {
   }, []);
 
   const manejarGuardar = async () => {
-    if (!nombre || !correo || !rol) return;
+    if (!nombre || !correo || !rol || !contrasena) return;
 
     if (editandoId) {
       const ref = doc(db, "usuarios", editandoId);
